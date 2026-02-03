@@ -64,17 +64,17 @@ def normalize_branch_name(branch: str) -> str:
 
 def find_journal_path(repo_root: Path, normalized_branch: str) -> Path | None:
     """Find the journal file for the given branch."""
-    branches_dir = repo_root / "branches"
-    if not branches_dir.exists():
+    journals_dir = repo_root / "journals"
+    if not journals_dir.exists():
         return None
 
-    pattern = re.compile(r"^\d{4}-\d{2}-\d{2}_" + re.escape(normalized_branch) + "$")
+    pattern = re.compile(
+        r"^\d{4}-\d{2}-\d{2}_" + re.escape(normalized_branch) + r"\.md$"
+    )
 
-    for item in branches_dir.iterdir():
-        if item.is_dir() and pattern.match(item.name):
-            journal_path = item / "git-journal.md"
-            if journal_path.exists():
-                return journal_path
+    for item in journals_dir.iterdir():
+        if item.is_file() and pattern.match(item.name):
+            return item
 
     return None
 

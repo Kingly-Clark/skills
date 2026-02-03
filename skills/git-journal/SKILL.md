@@ -28,11 +28,11 @@ Capture the "Why" behind code changes. Git tracks what/where/when/who—this ski
 ## Journal Location
 
 ```
-branches/YYYY-MM-DD_<branch-name>/git-journal.md
+journals/YYYY-MM-DD_<branch-name>.md
 ```
 
 - One journal per branch
-- Folder reused for branch lifetime
+- Flat file structure (no nested folders)
 - Branch names normalized (slashes → hyphens)
 
 ## The 5 W's Priority

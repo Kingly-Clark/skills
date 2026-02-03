@@ -3,7 +3,7 @@
 ensure_git_journal.py
 
 Ensures a Git Journal exists for the current branch.
-Creates the journal folder and file from template if missing.
+Creates the journal file from template if missing.
 
 Cross-platform: Works on Windows, macOS, and Linux.
 Requires: Python 3.7+, Git
@@ -73,22 +73,24 @@ def normalize_branch_name(branch: str) -> str:
     return normalized
 
 
-def find_existing_journal_folder(
-    branches_dir: Path, normalized_branch: str
+def find_existing_journal_file(
+    journals_dir: Path, normalized_branch: str
 ) -> Path | None:
     """
-    Find an existing journal folder for the given branch.
+    Find an existing journal file for the given branch.
 
-    Journal folders are named: YYYY-MM-DD_<normalized-branch-name>
+    Journal files are named: YYYY-MM-DD_<normalized-branch-name>.md
     The date prefix may vary, so we match on the branch name suffix.
     """
-    if not branches_dir.exists():
+    if not journals_dir.exists():
         return None
 
-    pattern = re.compile(r"^\d{4}-\d{2}-\d{2}_" + re.escape(normalized_branch) + "$")
+    pattern = re.compile(
+        r"^\d{4}-\d{2}-\d{2}_" + re.escape(normalized_branch) + r"\.md$"
+    )
 
-    for item in branches_dir.iterdir():
-        if item.is_dir() and pattern.match(item.name):
+    for item in journals_dir.iterdir():
+        if item.is_file() and pattern.match(item.name):
             return item
 
     return None
@@ -215,27 +217,22 @@ def ensure_git_journal() -> int:
     print(f"Branch: {branch} (normalized: {normalized_branch})")
 
     # Set up paths
-    branches_dir = repo_root / "branches"
+    journals_dir = repo_root / "journals"
 
-    # Check for existing journal folder
-    existing_folder = find_existing_journal_folder(branches_dir, normalized_branch)
+    # Check for existing journal file
+    existing_file = find_existing_journal_file(journals_dir, normalized_branch)
 
-    if existing_folder:
-        journal_path = existing_folder / "git-journal.md"
-        if journal_path.exists():
-            print(f"Journal already exists: {journal_path.relative_to(repo_root)}")
-            return 0
-        else:
-            # Folder exists but no journal file - create it
-            journal_folder = existing_folder
-    else:
-        # Create new folder with today's date
-        today = datetime.now().strftime("%Y-%m-%d")
-        folder_name = f"{today}_{normalized_branch}"
-        journal_folder = branches_dir / folder_name
+    if existing_file:
+        print(f"Journal already exists: {existing_file.relative_to(repo_root)}")
+        return 0
 
-    # Ensure directories exist
-    journal_folder.mkdir(parents=True, exist_ok=True)
+    # Ensure journals directory exists
+    journals_dir.mkdir(parents=True, exist_ok=True)
+
+    # Create new file with today's date
+    today = datetime.now().strftime("%Y-%m-%d")
+    file_name = f"{today}_{normalized_branch}.md"
+    journal_path = journals_dir / file_name
 
     # Find the skill directory (for loading template)
     script_dir = Path(__file__).parent
@@ -246,7 +243,6 @@ def ensure_git_journal() -> int:
     content = populate_template(template, branch)
 
     # Write the journal file
-    journal_path = journal_folder / "git-journal.md"
     journal_path.write_text(content, encoding="utf-8")
 
     print(f"Created journal: {journal_path.relative_to(repo_root)}")

@@ -52,7 +52,7 @@ The "Why" is the most important section. If time is limited, ensure only the Why
 
 Journals are stored at:
 ```
-branches/YYYY-MM-DD_<branch-name>/git-journal.md
+journals/YYYY-MM-DD_<branch-name>.md
 ```
 
 One journal per branch, reused for the branch's entire lifetime.
