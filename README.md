@@ -45,6 +45,40 @@ Git Journal captures the Why while it still exists.
 
 [View full documentation →](skills/git-journal/SKILL.md)
 
+### wunderfan-brand
+
+Brand guidelines for **Wunderfan** web projects.
+
+**Use when:**
+- Building websites, landing pages, or micro apps for Wunderfan
+- Using AI web builders (Lovable, v0, etc.)
+
+**Features:**
+- Colors: Primary blue (`#007AFF`), teal accent (`#50D8DD`)
+- Typography: Poppins (single font system)
+- Spacing, border radii, button styles
+- CSS variables and Tailwind config templates
+- SVG logo assets (customizable colors)
+
+[View full documentation →](skills/wunderfan-brand/SKILL.md)
+
+### wunderpar-brand
+
+Brand guidelines for **Wunderpar** web projects.
+
+**Use when:**
+- Building websites, landing pages, or micro apps for Wunderpar
+- Using AI web builders (Lovable, v0, etc.)
+
+**Features:**
+- Colors: Primary olive green (`#40452F`), gold accent (`#E3C895`), cream background (`#FFFEF3`)
+- Typography: Dual font system — Poppins (body) + Fraunces (display/titles)
+- Spacing, border radii, button styles
+- CSS variables and Tailwind config templates
+- SVG logo assets (customizable colors)
+
+[View full documentation →](skills/wunderpar-brand/SKILL.md)
+
 ---
 
 ## Skill Structure
