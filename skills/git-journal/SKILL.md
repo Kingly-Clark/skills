@@ -1,6 +1,6 @@
 ---
 name: git-journal
-description: Capture the "Why" behind code changes during AI-assisted development. Creates branch-scoped markdown journals preserving reasoning, tradeoffs, and context that would otherwise be lost. Use before commits, PRs, or multi-file changes. Use when significant reasoning happened in conversation that should be preserved. Use when the user asks to document why a decision was made.
+description: Capture the "Why" behind code changes during AI-assisted development. Creates branch-scoped markdown journals preserving reasoning, tradeoffs, and context that would otherwise be lost. Use before commits, PRs, or multi-file changes. Use when significant reasoning happened in conversation that should be preserved. Use when the user asks to document why a decision was made. Use when the user says "remember to journal", "anything to journal", or similar prompts.
 license: MIT
 metadata:
   author: git-journal
@@ -10,6 +10,35 @@ metadata:
 # Git Journal
 
 Capture the "Why" behind code changes. Git tracks what/where/when/who—this skill captures **why**.
+
+## Trigger Phrases
+
+Users invoke this skill with phrases like:
+
+| Phrase | Behavior |
+|--------|----------|
+| **"remember to journal"** | Set a session-long reminder. Throughout the conversation, proactively consider journaling when significant decisions are made, tradeoffs are discussed, or non-obvious solutions are chosen. |
+| **"anything to journal?"** | Reflect on the current session. Review recent commits, code changes, and conversation to identify anything worth preserving in the journal. |
+| **"journal this"** | Immediately capture the current context/decision in the journal. |
+| **"update the journal"** | Run the update script and prompt for Why content. |
+
+### "Remember to Journal" Mode
+
+When activated, keep journaling in mind for the entire session:
+- After complex problem-solving → consider journaling the reasoning
+- After architectural decisions → capture the tradeoffs
+- After rejected approaches → document why they were rejected
+- Before commits → prompt if there's unjournaled context
+
+### "Anything to Journal?" Reflection
+
+When asked, review:
+1. Recent git commits on the current branch
+2. Code changes made during this conversation
+3. Decisions and tradeoffs discussed
+4. Non-obvious solutions or workarounds implemented
+
+Then suggest specific entries for the journal, or confirm nothing significant needs capturing.
 
 ## Quick Start
 

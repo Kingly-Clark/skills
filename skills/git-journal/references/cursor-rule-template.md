@@ -13,6 +13,15 @@ alwaysApply: true
 
 # Git Journal Integration
 
+## Trigger Phrases
+
+| Phrase | Behavior |
+|--------|----------|
+| **"remember to journal"** | Keep journaling in mind for the entire session. Proactively consider journaling after significant decisions or tradeoffs. |
+| **"anything to journal?"** | Reflect on recent commits and conversation. Suggest entries or confirm nothing needs capturing. |
+| **"journal this"** | Immediately capture the current context in the journal. |
+| **"update the journal"** | Run the update script and prompt for Why content. |
+
 ## When to Update Git Journal
 
 Update the Git Journal **before**:
